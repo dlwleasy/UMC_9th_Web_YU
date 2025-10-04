@@ -4,18 +4,25 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/home";
 import NotFound from "./pages/not-found";
 import Movies from "./pages/movies";
-//import RootLayout from "./layout/root-layout";
+import RootLayout from "./layout/root-layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-    //element: <RootLayout />,
+    element: <RootLayout />,
     errorElement: <NotFound />,
-  },
-  {
-    path: "/movies",
-    element: <Movies />,
+
+    //아래에 표시할 자식 라우트
+    children: [
+      {
+        index: true, //부모의 경로가 /일 때 보여줄 기본 경로
+        element: <HomePage />,
+      },
+      {
+        path: "/movies",
+        element: <Movies />,
+      },
+    ],
   },
 ]);
 
