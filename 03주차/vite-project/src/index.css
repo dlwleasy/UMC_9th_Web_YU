@@ -12,7 +12,6 @@
 .MovieThrailer {
   display: flex;
   justify-content: center;
-
 }
 
 
@@ -26,16 +25,17 @@ iframe {
 .MovieInfo {
   position: absolute;
   padding: 2.5%;
-  opacity: 0.5;
+  opacity: 0;
   color: white;
   transition: opacity 0.4s ease-in-out;
   overflow:scroll;
-  height: 25rem;
-  width: 15rem;
+  height: 45rem;
+  width: 25rem;
 }
 
 .MovieInfo:hover {
   opacity: 1;
+  background: linear-gradient(66deg, rgb(0, 0, 0) 0%, transparent 100%)
 }
 
 .CharacterInMovie_container {

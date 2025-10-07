@@ -121,3 +121,8 @@ article div {
   font-family: 'MyBoldFont';
   src: url(./font/DrukWideBold.ttf);
 }
+
+h1 {
+  font-family: 'MyBoldFont';
+  font-size: 25px;
+}
