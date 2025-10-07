@@ -9,3 +9,35 @@
   min-height: 100vh;
 }
 
+.MovieThrailer {
+  display: flex;
+  justify-content: center;
+
+}
+
+
+iframe {
+  width: 95%;
+  height: 50vw;
+  border-radius: 20px;
+  padding: 20
+}
+
+.MovieInfo {
+  position: absolute;
+  padding: 2.5%;
+  opacity: 0.5;
+  color: white;
+  transition: opacity 0.4s ease-in-out;
+  overflow:scroll;
+  height: 25rem;
+  width: 15rem;
+}
+
+.MovieInfo:hover {
+  opacity: 1;
+}
+
+.CharacterInMovie_container {
+  padding: 2.5%;
+}

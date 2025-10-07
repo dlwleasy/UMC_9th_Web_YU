@@ -22,7 +22,7 @@ img {
   filter: blur(4px);
 }
 
-p {
+.SimpleMovieInfo {
   display: -webkit-box;
   line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -110,3 +110,14 @@ article div {
   color: white;
 }
 
+.CharacterInMovie_title {
+  color: white;
+  font-size: 50px;
+  padding-bottom: 1rem;
+  font-family: 'MyBoldFont';
+}
+
+@font-face {
+  font-family: 'MyBoldFont';
+  src: url(./font/DrukWideBold.ttf);
+}
