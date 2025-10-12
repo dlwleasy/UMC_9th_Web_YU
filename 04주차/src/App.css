@@ -1,0 +1,74 @@
+.NavBar_container {
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(22, 21, 21);
+    color: aliceblue;
+}
+.NavBar-Buttons_container {
+    display: flex;
+    align-items: center;
+}
+.NavBar-Buttons_container button{
+    margin: 1vw;
+
+}
+body {
+    margin: 0;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:black;
+    color: aliceblue;
+}
+
+.login_container {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    height: 35vh;
+    gap: 2vw;
+}
+
+.Button-back {
+    background-color: black;
+    color: aliceblue;
+    border: none;
+}
+
+.google_login {
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 5px;
+    border: 1px solid white ;
+    height: 5vh;
+}
+
+.login {
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(17, 16, 16);
+    color: aliceblue;
+    height: 5vh;
+    transition: background-color 0.4s ease-in-out;
+}
+.login:disabled {
+    background-color: green;
+}
+
+.login_container input {
+    border: 1px solid white;
+    border-radius: 5px;
+    height: 4vh;
+    background-color: rgb(62, 63, 62);
+}
+
+.alert {
+    color: red;
+    font-size: 15px;
+}
