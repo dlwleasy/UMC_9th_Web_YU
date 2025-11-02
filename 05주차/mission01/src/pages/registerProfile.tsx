@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import memberIcon from '../assets/member_icon2.png';
-import type { LoginInfo } from '../types/profileInfo';
 import { useState } from 'react';
 import axios from "axios";
 

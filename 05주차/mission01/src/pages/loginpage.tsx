@@ -29,8 +29,8 @@ const Login = () => {
         axios.post(SingInURL,{'email':ID,'password':Password}).then(
             function (response) {
                 const {accessToken, refreshToken} = response.data.data;
-                console.log(response,accessToken,refreshToken)
-                navigateForsuccessLogin('/')
+                console.log(response,accessToken,refreshToken);
+                navigateForsuccessLogin('/');
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
             }
