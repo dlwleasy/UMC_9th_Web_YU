@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+
 
 export default function SignupNickname() {
   const navigate = useNavigate();
@@ -19,11 +21,12 @@ export default function SignupNickname() {
     }
 
     // 실제 서버 API 호출 부분 (axios 사용 가능)
-    console.log("회원가입 데이터:", { email, password, nickname });
-
-    alert(`회원가입 완료!\n이메일: ${email}\n닉네임: ${nickname}`);
-    navigate("/"); // 홈으로 이동
-  };
+    const getToken = async () => {
+        const SingInURL = 'http://localhost:8000/v1/auth/signin';
+        axios.post(SingInURL,{'email':ID,'password':Password}).then(
+            function (response) {
+                const {accessToken, refreshToken} = response.data.data;
+                console.log(response,accessToken,refreshToken);
 
   return (
     <div style={{ padding: "20px" }}>
