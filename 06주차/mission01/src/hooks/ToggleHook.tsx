@@ -3,7 +3,7 @@ import { useState } from "react";
 
 function CheckID() {
     const [ID, setID] = useState('')
-    
+
     const handleValueCheck = (e:any) => {
         setID(e.target.value)
         return ID.includes('@') && ID.includes('.')

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 const Register = () => {
     const [Value_ID, setID] = useState('')
     
-    
+
 
     const handleIDCheck = (e:any) => {
         const Value_ID = e.target.value;

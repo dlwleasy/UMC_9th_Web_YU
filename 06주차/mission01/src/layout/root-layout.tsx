@@ -5,10 +5,7 @@ const Rootlayout = () => {
     return (
         <>
             <Navbar></Navbar>
-            <main>
-                <div className='SideBar'></div>
-                <Outlet></Outlet>
-            </main>
+            <Outlet></Outlet>
         </>
     )
 }

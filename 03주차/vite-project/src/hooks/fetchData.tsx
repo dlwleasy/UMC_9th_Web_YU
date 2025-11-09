@@ -37,3 +37,7 @@ function useFetch(PageNum:number|undefined) {
 }
 
 export default useFetch
+
+function fetchLP() {
+  
+}

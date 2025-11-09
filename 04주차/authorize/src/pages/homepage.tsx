@@ -1,5 +1,11 @@
+import Infinite from '../components/useInfiniteQuery'
+
 const HomePage = () => {
-  return <h1>Home Page 야호~!</h1>;
+  return (
+  <Infinite>
+    
+  </Infinite>
+)
 };
 
 export default HomePage;
