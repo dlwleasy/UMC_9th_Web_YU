@@ -5,13 +5,11 @@ import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
-  //값 저장 -> 바뀌면 업그레이드 반복
-  //이벤트로써 onChange가 되면 값을 저장하고 이를 추적해주기 시작하면 된다.
 
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
 
-  //1.처음에는 값을 저장만 해줌
+  // 값 저장
   const handleEmail = (e) => {
     setEmail(e.target.value.trim());
   };
@@ -20,16 +18,12 @@ export default function Login() {
     setPw(e.target.value.trim());
   };
 
-  //2.값 검증
+  // 값 검증
   const email_valid = email.includes("@") && email.includes(".");
-  const pw_valid = pw.length() > 6;
+  const pw_valid = pw.length > 6;
   const login_valid = email_valid && pw_valid;
 
-  //   else alert("올바르게 이메일을 입력하세요.");console.log("비밀번호는 최소 6자 이상이어야 합니다");
-
-  //로그인 상태 활성화
-
-  //토큰
+  // 로그인 토큰
   const loginToken = () => {
     const loginURL = "http://localhost:8000/v1/auth/signin";
     axios
@@ -40,13 +34,13 @@ export default function Login() {
       })
       .catch((error) => {
         console.error("로그인 실패:", error);
-        alert("로그인 중 오류가 발생했습니다.");
+        alert("없는 정보이거나 로그인에 실패하였습니다.");
       });
   };
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
       <div className="login-header">
         <button className="login-header-back" onClick={() => navigate(-1)}>
           ◀
@@ -56,6 +50,7 @@ export default function Login() {
 
       <button className="google">구글 로그인</button>
       <h4>-------------or------------------</h4>
+
       <div className="login">
         <input
           className="login-email"
@@ -63,20 +58,26 @@ export default function Login() {
           onChange={handleEmail}
           type="text"
           placeholder="이메일을 입력하세요!"
-        ></input>
-        {email_valid == false && (
-          <span className="alert ID">이메일 형식이 아닙니다.</span>
-        )}
+        />
+        {/* 입력값이 있고 유효하지 않을 때만 에러 표시 */}
+        {
+          email.length > 0 && !email_valid && (
+            <span className="alert ID">이메일 형식이 아닙니다.</span>
+          ) //한줄로 끝낼 수 있으며 올바른 js표현식이라서 가능하다.
+        }
+
         <input
           className="login-password"
           value={pw}
           onChange={handlePw}
-          type="text"
+          type="password"
           placeholder="비밀번호를 입력하세요!"
-        ></input>
-        {pw_valid == false && (
-          <span className="alert ID">이메일 형식이 아닙니다.</span>
+        />
+        {/* 입력값이 있고 유효하지 않을 때만 에러 표시 */}
+        {pw.length > 0 && !pw_valid && (
+          <span className="alert ID">비밀번호는 6자 이상이어야 합니다.</span>
         )}
+
         <button
           className="login-button"
           disabled={!login_valid}
@@ -88,6 +89,3 @@ export default function Login() {
     </>
   );
 }
-
-//입력값을 받아야된다. value-> useState로 한다면 추적가능하다. 변경되면 저장
-//조건은 있다. 만족하지 않으면 에러 메시지를 보여준다.

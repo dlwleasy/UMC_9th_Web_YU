@@ -12,6 +12,9 @@ export default function Navbar() {
         <Link to="/signup">
           <button>회원가입</button>
         </Link>
+        <Link to="/mypage">
+          <button>마이페이지</button>
+        </Link>
       </div>
     </header>
   );
