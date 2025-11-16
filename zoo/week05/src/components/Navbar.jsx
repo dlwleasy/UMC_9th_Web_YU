@@ -2,11 +2,30 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { apiInstance } from "../api/axios.js";
 import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
   const MoveToLogin = useNavigate();
   let status = localStorage.getItem("IsLoginned") ?? false;
   console.log("로그인 여부", status);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    //login
+    if (status) {
+      const Token = localStorage.getItem("accessToken");
+      const GetMyInfo = "/v1/users/me";
+      const headers = {
+        Authorization: `Bearer ${Token}`,
+      };
+
+      apiInstance.get(GetMyInfo, { headers }).then((response) => {
+        console.log(response);
+        setUserName(response.data.data.name);
+        console.log(userName);
+      });
+    }
+  }, [status, userName]);
 
   const sendToken = async () => {
     const Token = localStorage.getItem("accessToken");
@@ -14,10 +33,12 @@ export default function Navbar() {
     const headers = {
       Authorization: `Bearer ${Token}`,
     };
+
     apiInstance
       .get(GetMyInfo, { headers })
       .then((response) => {
         console.log(response);
+        console.log(response.data.data.name);
       })
       .catch((error) => {
         console.log(error);
@@ -82,12 +103,28 @@ export default function Navbar() {
   return (
     <>
       <div className="nav">
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="4"
+            d="M7.95 11.95h32m-32 12h32m-32 12h32"
+          />
+        </svg>
         <h2 className="logo">돌려돌려LP판</h2>
 
         <span>
           {status ? (
             <>
               <button onClick={sendToken}>내정보</button>
+              <div>{userName}반갑습니다.</div>
               <button onClick={LogOut}>로그아웃</button>
             </>
           ) : (
@@ -105,3 +142,5 @@ export default function Navbar() {
     </>
   );
 }
+
+//화면을 바꾸기 위해서 state : 변수 - 상태가 변한는
