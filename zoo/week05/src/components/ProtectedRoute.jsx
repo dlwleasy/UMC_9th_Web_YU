@@ -7,7 +7,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 export default function ProtectedRoute({ children }) {
   //토큰 확인
-  const isLogin = Boolean(localStorage.getItem("token"));
+  const isLogin = Boolean(localStorage.getItem("IsLoginned"));
   //토큰이 있으면 true, 없으면 false-> 현 위치 저장
   const location = useLocation();
 
@@ -17,8 +17,8 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   //replace의 덫에 걸리게되는 경우 : 계속해서 왔다갔다 -> 현재페이지를 히스토리에서 덮어써서 로그인 페이지로 대체replace
-//mypage가 현재페이지로 덮어써짐 - replace
-//from : 원래가려던 곳 알려줌
+  //mypage가 현재페이지로 덮어써짐 - replace
+  //from : 원래가려던 곳 알려줌
 
   //로그인 된 상태-> 감싸진 컴포넌트 렌더링
   return children;

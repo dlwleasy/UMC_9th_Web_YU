@@ -18,14 +18,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signup/password" element={<SignupPassword />} />
         <Route path="/signup/nickname" element={<SignupNickname />} />
-        <Route
-          path="/mypage"
-          element={
-            <ProtectedRoute>
-              <Mypage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/mypage" element={<Mypage />} />
       </Routes>
     </>
   );

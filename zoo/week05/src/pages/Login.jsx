@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+//로그인
 export default function Login() {
   const navigate = useNavigate();
 
@@ -29,7 +30,12 @@ export default function Login() {
     axios
       .post(loginURL, { email: email, password: pw })
       .then((response) => {
-        console.log(response.data);
+        const { accessToken, refreshToken } = response.data.data;
+        console.log("로그인 성공", response, accessToken, refreshToken);
+        localStorage.setItem("userName", response.data.data.name);
+        localStorage.setItem("IsLoginned", response.data.status);
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
         navigate("/");
       })
       .catch((error) => {
