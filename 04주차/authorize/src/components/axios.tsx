@@ -6,13 +6,15 @@ export const apiInstance = axios.create({
 
 apiInstance.interceptors.response.use((response):any => {
     console.log('요청이 성공적으로 처리되었습니다.',response)
+    return response
 }, async (error) => {
     console.log(`${error.response.status} CODE ERROR!`)
     const refreshtoken = localStorage.getItem('refreshToken')
     console.log(refreshtoken)
     if (refreshtoken) {
         const response = await axios.post('http://localhost:8000/v1/auth/refresh',{'refresh':refreshtoken});
-        
+        var test = {'refresh' : refreshtoken};
+        console.log(test);
         console.log(response)
 
         const {accessToken, refreshToken} = response.data.data;
@@ -21,10 +23,10 @@ apiInstance.interceptors.response.use((response):any => {
         localStorage.clear()
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
+        //실패한 요청
         const originalRequest = error.config
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`
         return apiInstance(originalRequest)
     };
-        
     } 
 )

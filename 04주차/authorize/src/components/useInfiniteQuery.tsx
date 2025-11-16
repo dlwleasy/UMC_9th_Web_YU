@@ -41,16 +41,13 @@ export default function Infinite() {
                     <div className='show-LP'>
                         {data.pages.map((page,i)=>(
                             page.data.data.map((item,j)=>(
-                                <article key={item.id}>
-                                    <img src={`${item.thumbnail}`} className="LP_img">
+                                    <img key={item.id} src={`${item.thumbnail}`} className="LP_img">
                                     </img>
-                                </article>
                             ))
                         ))}
                         <div className="check_infinite" ref={ref}>한재연</div>
                     </div>
             </div>
-            
         </>
     )
 };

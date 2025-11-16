@@ -6,7 +6,6 @@ const Login = () => {
     
     const navigateForsuccessLogin = useNavigate();
 
-
     const navigate = useNavigate();
     const handleIDCheck = (e:any) => {
         const Value_ID = e.target.value;
@@ -30,9 +29,11 @@ const Login = () => {
             function (response) {
                 const {accessToken, refreshToken} = response.data.data;
                 console.log(response,accessToken,refreshToken)
-                navigateForsuccessLogin('/')
+                localStorage.setItem('userName',response.data.data.name)
+                localStorage.setItem('IsLoginned',response.data.data.status)
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
+                navigateForsuccessLogin('/')
             }
         ).catch(function (response){
             console.log('로그인 시도중 에러 발생:', response)
