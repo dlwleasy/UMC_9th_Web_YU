@@ -23,3 +23,10 @@ function CheckPassword() {
 }
 
 export default CheckID; CheckPassword
+
+export function sortASC() {
+    return 'ASC'
+}
+export function sortDESC() {
+    return 'DESC'
+}

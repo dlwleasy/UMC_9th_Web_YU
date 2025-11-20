@@ -1,10 +1,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {useInView} from 'react-intersection-observer'
+import Switch from '@mui/material/Switch'
+
 
 const LimitNum=10
-async function fetchLP({pageParam=1}:{pageParam?:number}) {
-    const res = await fetch(`http://localhost:8000/v1/lps?cursor=${pageParam}&limit=${LimitNum}`)
+async function fetchLP({pageParam=1,sort}:{pageParam?:number,sort?:'asc' | 'desc'}) {
+    const res = await fetch(`http://localhost:8000/v1/lps?cursor=${pageParam}&limit=${LimitNum}&order=${sort}`)
     if (!res.ok) throw new Error("데이터 요청에 실패!") 
     const data = await res.json();
     console.log(`[요청에 성공!]\n${res}\n[요청에 성공!]`)
@@ -13,11 +15,19 @@ async function fetchLP({pageParam=1}:{pageParam?:number}) {
 }
 
 export default function Infinite() {
-     const { ref, inView } = useInView();
+    const { ref, inView } = useInView();
 
+    const [checked, setCheck] = useState(false)
+
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        setCheck(e.target.checked)
+    }
+
+    const latestOrOld: 'asc' | 'desc'= checked ? 'asc' : 'desc'
+    
     const {data,status, hasNextPage, isFetching, isFetchingNextPage, fetchNextPage} = useInfiniteQuery({
-        queryKey:['LPs'],
-        queryFn: ({pageParam})=> fetchLP({pageParam}),
+        queryKey:['LPs',latestOrOld],
+        queryFn: ({pageParam})=> fetchLP({pageParam, sort:latestOrOld}),
         initialPageParam: 0,
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.data.nextCursor
@@ -37,6 +47,7 @@ export default function Infinite() {
     
     return (
         <>
+            <Switch className="Swiching_Button" onChange={handleChange} checked={checked}></Switch>
             <div className='show-LP_container'>
                     <div className='show-LP'>
                         {data.pages.map((page,i)=>(

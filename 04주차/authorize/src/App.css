@@ -202,3 +202,18 @@ main {
     border-radius: 50%; /* 원형으로 만들기 */
     object-fit: cover;
 }
+
+.NavBar-button > svg {
+    color: aliceblue;
+}
+
+.NavBar-button {
+    border: none;
+}
+
+.Swiching_Button {
+    position: fixed;
+    left: 85vw;
+    bottom: 50vh;
+
+}

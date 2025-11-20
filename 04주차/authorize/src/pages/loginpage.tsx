@@ -29,8 +29,10 @@ const Login = () => {
             function (response) {
                 const {accessToken, refreshToken} = response.data.data;
                 console.log(response,accessToken,refreshToken)
+                localStorage.clear()
                 localStorage.setItem('userName',response.data.data.name)
-                localStorage.setItem('IsLoginned',response.data.data.status)
+                localStorage.setItem('login',response.data.status)
+                console.log(response.data.status)
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
                 navigateForsuccessLogin('/')
