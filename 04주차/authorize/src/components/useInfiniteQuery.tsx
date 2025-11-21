@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type Key } from "react";
 import {useInView} from 'react-intersection-observer'
 import Switch from '@mui/material/Switch'
-
+import { GETLP } from "./getLPdetails";
 
 const LimitNum=10
 async function fetchLP({pageParam=1,sort}:{pageParam?:number,sort?:'asc' | 'desc'}) {
@@ -16,6 +16,8 @@ async function fetchLP({pageParam=1,sort}:{pageParam?:number,sort?:'asc' | 'desc
 
 export default function Infinite() {
     const { ref, inView } = useInView();
+
+    const [isHovered, setHover] = useState<any>(false)
 
     const [checked, setCheck] = useState(false)
 
@@ -43,7 +45,8 @@ export default function Infinite() {
     if(status=='error') {
         return <div> 에러 발생 </div>
     }
-
+    
+    
     
     return (
         <>
@@ -51,9 +54,9 @@ export default function Infinite() {
             <div className='show-LP_container'>
                     <div className='show-LP'>
                         {data.pages.map((page,i)=>(
-                            page.data.data.map((item,j)=>(
-                                    <img key={item.id} src={`${item.thumbnail}`} className="LP_img">
-                                    </img>
+                            page.data.data.map((item: { id: Key | null | undefined; thumbnail: any; },j: any)=>(
+                                <GETLP item={item}>
+                                </GETLP>
                             ))
                         ))}
                         <div className="check_infinite" ref={ref}>한재연</div>

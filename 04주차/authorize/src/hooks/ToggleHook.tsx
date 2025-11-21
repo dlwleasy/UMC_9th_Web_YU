@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useState, type Key } from "react";
 
 
 function CheckID() {
@@ -24,9 +26,18 @@ function CheckPassword() {
 
 export default CheckID; CheckPassword
 
-export function sortASC() {
-    return 'ASC'
-}
-export function sortDESC() {
-    return 'DESC'
+const GetLP = async (GetLPurl:string) => {
+            const response  = await axios.get(GetLPurl)
+
+            console.log('LP의 상세 정보입니다!\n',response)
+            return response
+        }
+
+
+export function GetLPdetails(ID:Key | null | undefined) {
+    const GetLPurl = `http://localhost:8000/v1/lps/${ID}`
+    const {data, isLoading, isError, error} = useQuery({
+        queryKey:['LPs_Detail',ID],
+        queryFn: () => GetLP(GetLPurl)})
+    return {data, isLoading, isError, error}
 }
