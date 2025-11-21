@@ -2,30 +2,30 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { apiInstance } from "../api/axios.js";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
   const MoveToLogin = useNavigate();
   let status = localStorage.getItem("IsLoginned") ?? false;
   console.log("로그인 여부", status);
-  const [userName, setUserName] = useState("");
+  // const [userName, setUserName] = useState("");
 
-  useEffect(() => {
-    //login
-    if (status) {
-      const Token = localStorage.getItem("accessToken");
-      const GetMyInfo = "/v1/users/me";
-      const headers = {
-        Authorization: `Bearer ${Token}`,
-      };
+  // useEffect(() => {
+  //   //login
+  //   if (status) {
+  //     const Token = localStorage.getItem("accessToken");
+  //     const GetMyInfo = "/v1/users/me";
+  //     const headers = {
+  //       Authorization: `Bearer ${Token}`,
+  //     };
 
-      apiInstance.get(GetMyInfo, { headers }).then((response) => {
-        console.log(response);
-        setUserName(response.data.data.name);
-        console.log(userName);
-      });
-    }
-  }, [status, userName]);
+  //     apiInstance.get(GetMyInfo, { headers }).then((response) => {
+  //       console.log(response);
+  //       // setUserName(response.data.data.name);
+  //       //console.log(userName);
+  //     });
+  //   }
+  // }, []);
 
   const sendToken = async () => {
     const Token = localStorage.getItem("accessToken");
@@ -124,7 +124,7 @@ export default function Navbar() {
           {status ? (
             <>
               <button onClick={sendToken}>내정보</button>
-              <div>{userName}반갑습니다.</div>
+              <div>userName반갑습니다.</div>
               <button onClick={LogOut}>로그아웃</button>
             </>
           ) : (

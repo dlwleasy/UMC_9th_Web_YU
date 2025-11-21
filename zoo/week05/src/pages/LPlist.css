@@ -53,3 +53,35 @@
 .lp-card:hover .lp-info {
   opacity: 1;
 }
+/* LPlist.css */
+
+.floating-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* 원형 버튼 */
+  background-color: #ff6cc2;
+  color: white;
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+  z-index: 1000; /* 다른 요소 위에 표시 */
+  transition: all 0.3s ease;
+}
+
+.floating-btn:hover {
+  background-color: #ff8eec;
+  transform: scale(1.1); /* 마우스 올리면 살짝 커짐 */
+}
+
+.floating-btn:active {
+  transform: scale(0.95); /* 클릭하면 살짝 작아짐 */
+}
+
+.floating-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

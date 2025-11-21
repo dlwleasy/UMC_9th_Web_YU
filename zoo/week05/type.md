@@ -43,3 +43,22 @@ published: boolean
 "nextCursor": 10, -> 다음 페이지를 요청해야할때 사용하는 커서 값
 "hasNext": true => 다음페이지 존재유무
 }
+
+axios.get("http://localhost:8000/v1/lps", {
+params: {
+cursor: 10,
+pageSize: 10,
+},
+});
+GET http://localhost:8000/v1/lps?cursor=10&pageSize=10
+메서드: GET
+
+URL: http://localhost:8000/v1/lps
+
+쿼리 파라미터:
+
+cursor = 0 //요청할 때마다 새 nextCursor를 계산해서 응답에 넣어주는것 백엔드가 자동으로해줌 ㅎㅎ
+
+limit = 10
+
+order = asc
