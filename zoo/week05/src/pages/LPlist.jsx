@@ -11,7 +11,7 @@ export default function LPlist() {
   useEffect(() => {
     const fetchLP = async () => {
       try {
-        const res = await axios("http://localhost:8000/v1/lps");
+        const res = await axios("http://localhost:8000/v1/lps"); //axios.get("http://localhost:8000/v1/lps") 와 동일.get이 기본값
         //data.data.data;
         const lpArray = res.data.data.data;
         setLpList(lpArray);
@@ -30,24 +30,25 @@ export default function LPlist() {
   if (error) return <div> error! </div>;
   return (
     <div className="lp-page">
-      {/* 중앙 큰 박스 */}
-      <div className="lp-grid-wrapper">
-        <div className="lp-grid">
-          {lpList.map((lp) => (
+      <div className="lp-grid">
+        {lpList.map((lp) => (
+          <>
             <div className="lp-card" key={lp.id}>
-              <img src={lp.thumbnail} alt={lp.title} />
-              {/* 밑에처럼 오버레이 정보도 넣을 수 있음 */}
-              <div className="lp-info">
-                <div className="lp-title">{lp.title}</div>
-                {/* <div className="lp-meta">1 days ago · ♥ 0</div> 이런 것도 가능 */}
-              </div>
+              <img src={lp.thumbnail} alt={lp.title}></img>
             </div>
-          ))}
-        </div>
+
+            <div className="lp-info">
+              <div className="lp-title">{lp.title}</div>
+              <div className="lp-content">{lp.content}</div>
+            </div>
+          </>
+        ))}
       </div>
     </div>
   );
 }
+
+// 객체 리터럴 반환? ()=>()
 
 //response데이터를 렌더링 해주기
 

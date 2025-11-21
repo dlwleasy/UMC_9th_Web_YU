@@ -2,17 +2,9 @@
 
 .lp-page {
   min-height: 100vh;
-  background: #000; /* 전체 배경 검정 */
   display: flex;
   justify-content: center;
   padding: 40px 0;
-}
-
-/* 가운데 큰 검정 박스 느낌 */
-.lp-grid-wrapper {
-  width: 80vw;
-  max-width: 1100px;
-  background: #000;
 }
 
 /* 앨범 커버 그리드 */

@@ -40,6 +40,6 @@ published: boolean
 ]
 }
 ],
-"nextCursor": 10,
-"hasNext": true
+"nextCursor": 10, -> 다음 페이지를 요청해야할때 사용하는 커서 값
+"hasNext": true => 다음페이지 존재유무
 }
