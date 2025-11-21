@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import SignupNickname from "./pages/SignupNickname.jsx";
 import SignupPassword from "./pages/SignupPassword.jsx";
 import { Routes, Route } from "react-router-dom";
+import LPlist from "./pages/LPlist";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup/password" element={<SignupPassword />} />
         <Route path="/signup/nickname" element={<SignupNickname />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/lp" element={<LPlist></LPlist>}></Route>
       </Routes>
     </>
   );
