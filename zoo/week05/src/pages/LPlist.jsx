@@ -10,12 +10,16 @@ export default function LPlist() {
   const [nextCursor, setNextCursor] = useState(null);
   const [hasNext, setHasNext] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
+  //sort
+  const [sort, setSort] = useState("latest"); //최신순으로 설정
 
   //axios는 항상 data에 값을 담아온다는 성질 이용하기
   useEffect(() => {
     const fetchLP = async () => {
+      setLoading(true);
       try {
-        const res = await axios("http://localhost:8000/v1/lps"); //axios.get("http://localhost:8000/v1/lps") 와 동일.get이 기본값
+        const res = await axios(`http://localhost:8000/v1/lps?sort=${sort}`);
+        //axios.get("http://localhost:8000/v1/lps") 와 동일.get이 기본값
         //data.data.data;
         const lpArray = res.data.data.data;
         setLpList(lpArray);
@@ -30,7 +34,7 @@ export default function LPlist() {
       }
     };
     fetchLP();
-  }, []);
+  }, [sort]);
 
   // 더보기를 다루는 법
   const handleLoadMore = async () => {
@@ -39,7 +43,8 @@ export default function LPlist() {
     setLoadingMore(true);
     try {
       const res = await axios(
-        `http://localhost:8000/v1/lps?cursor=${nextCursor}`
+        `http://localhost:8000/v1/lps?cursor=${nextCursor}&sort=${sort}`
+        //이거 안 하면 안됨
       );
       const newLpArray = res.data.data.data;
 
@@ -59,20 +64,37 @@ export default function LPlist() {
   if (error) return <div> error! </div>;
   return (
     <div className="lp-page">
+      <div className="sort-buttons">
+        <button
+          onClick={() => setSort("latest")}
+          className={`sort-btn ${sort === "latest" ? "active" : ""}`}
+        >
+          최신순 ▼
+        </button>
+
+        <button
+          onClick={() => setSort("oldest")}
+          className={`sort-btn ${sort === "oldest" ? "active" : ""}`}
+        >
+          오래된순 ▼
+        </button>
+      </div>
+
       <div className="lp-grid">
         {lpList.map((lp) => (
-          <>
-            <div className="lp-card" key={lp.id}>
-              <img src={lp.thumbnail} alt={lp.title}></img>
-            </div>
-
+          <div className="lp-card" key={lp.id}>
+            {" "}
+            {/* key는 최상위에! */}
+            <img src={lp.thumbnail} alt={lp.title} />
+            {/* info를 card 안으로! */}
             <div className="lp-info">
               <div className="lp-title">{lp.title}</div>
               <div className="lp-content">{lp.content}</div>
             </div>
-          </>
+          </div>
         ))}
       </div>
+
       {/* hasNext가 true일 때만 버튼 표시 */}
       {hasNext && (
         <button

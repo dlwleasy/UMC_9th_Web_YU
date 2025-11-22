@@ -5,6 +5,8 @@
   display: flex;
   justify-content: center;
   padding: 40px 0;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 앨범 커버 그리드 */
@@ -137,4 +139,35 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); /* 반투명하게 */
   z-index: 1000; /*기존의 모든 내용을 위에서 덮어*/
+}
+
+.sort-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.sort-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.sort-btn.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.sort-btn:not(.active) {
+  background-color: #ddd;
+  color: #333;
+}
+
+.sort-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
