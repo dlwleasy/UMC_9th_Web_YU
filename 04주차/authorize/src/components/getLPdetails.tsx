@@ -1,6 +1,7 @@
 import { useState, type Key } from "react"
 import { GetLPdetails } from "../hooks/ToggleHook"
 import { useNavigate } from "react-router-dom";
+import Skeleton from '@mui/material/Skeleton';
 
 interface ItemType { id: Key | null | undefined; thumbnail: any; }
 

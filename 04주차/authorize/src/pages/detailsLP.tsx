@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import { GetLPdetails } from "../hooks/ToggleHook"
+import Skeleton from '@mui/material/Skeleton';
 
 
 const DetailsLP= () => {

@@ -3,6 +3,7 @@ import { useEffect, useState, type Key } from "react";
 import {useInView} from 'react-intersection-observer'
 import Switch from '@mui/material/Switch'
 import { GETLP } from "./getLPdetails";
+import Skeleton from "@mui/material/Skeleton";
 
 const LimitNum=10
 async function fetchLP({pageParam=1,sort}:{pageParam?:number,sort?:'asc' | 'desc'}) {
@@ -27,7 +28,7 @@ export default function Infinite() {
 
     const latestOrOld: 'asc' | 'desc'= checked ? 'asc' : 'desc'
     
-    const {data,status, hasNextPage, isFetching, isFetchingNextPage, fetchNextPage} = useInfiniteQuery({
+    const {data,status, hasNextPage, isFetching, isFetchingNextPage, fetchNextPage, isLoading} = useInfiniteQuery({
         queryKey:['LPs',latestOrOld],
         queryFn: ({pageParam})=> fetchLP({pageParam, sort:latestOrOld}),
         initialPageParam: 0,
@@ -39,9 +40,6 @@ export default function Infinite() {
         ()=>{if (inView&&hasNextPage&&!isFetchingNextPage) {
                 fetchNextPage();
             }},[inView, hasNextPage, isFetchingNextPage, fetchNextPage])
-    if (status=="pending") {
-        return <div>로딩 중...</div>
-    }
     if(status=='error') {
         return <div> 에러 발생 </div>
     }
@@ -53,12 +51,15 @@ export default function Infinite() {
             <Switch className="Swiching_Button" onChange={handleChange} checked={checked}></Switch>
             <div className='show-LP_container'>
                     <div className='show-LP'>
-                        {data.pages.map((page,i)=>(
+                        {isLoading? Array.from(new Array(10)).map((_,index)=><Skeleton animation="wave" variant="rectangular" key={index} width={200} height={200} sx={{ bgcolor: 'grey.400' }}/>):data?.pages.map((page,i)=>(
                             page.data.data.map((item: { id: Key | null | undefined; thumbnail: any; },j: any)=>(
                                 <GETLP item={item}>
                                 </GETLP>
                             ))
                         ))}
+                        {isFetchingNextPage && (
+                         Array.from(new Array(10)).map((_,index)=><Skeleton key={index} animation="wave" variant="rectangular" width={200} height={200} sx={{ bgcolor: 'grey.400' }}/>
+                    ))}
                         <div className="check_infinite" ref={ref}>한재연</div>
                     </div>
             </div>
