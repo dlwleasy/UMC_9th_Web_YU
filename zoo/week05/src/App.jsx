@@ -6,8 +6,9 @@ import Mypage from "./pages/Mypage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import SignupNickname from "./pages/SignupNickname.jsx";
 import SignupPassword from "./pages/SignupPassword.jsx";
-import { Routes, Route } from "react-router-dom";
 import LPlist from "./pages/LPlist";
+import LPDetail from "./pages/LPDetail"; // 추가!
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/signup/password" element={<SignupPassword />} />
         <Route path="/signup/nickname" element={<SignupNickname />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/lp" element={<LPlist></LPlist>}></Route>
+        <Route path="/lp" element={<LPlist />} /> {/* 닫는 태그 간단하게 */}
+        <Route path="/lp/:lpid" element={<LPDetail />} />
       </Routes>
     </>
   );

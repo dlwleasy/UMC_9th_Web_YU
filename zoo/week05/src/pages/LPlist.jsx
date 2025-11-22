@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./LPlist.css";
+import { useNavigate } from "react-router-dom";
 
 export default function LPlist() {
   const [lpList, setLpList] = useState([]);
@@ -12,6 +13,13 @@ export default function LPlist() {
   const [loadingMore, setLoadingMore] = useState(false);
   //sort
   const [sort, setSort] = useState("latest"); //최신순으로 설정
+
+  const navigate = useNavigate();
+
+  //주소창 이동시킴
+  const handleCardClick = (lpId) => {
+    navigate(`/lp/${lpId}`);
+  };
 
   //axios는 항상 data에 값을 담아온다는 성질 이용하기
   useEffect(() => {
@@ -82,14 +90,23 @@ export default function LPlist() {
 
       <div className="lp-grid">
         {lpList.map((lp) => (
-          <div className="lp-card" key={lp.id}>
+          <div
+            className="lp-card"
+            key={lp.id}
+            onClick={() => handleCardClick(lp.id)}
+          >
             {" "}
+            <div className="lp-overlay"></div>
             {/* key는 최상위에! */}
             <img src={lp.thumbnail} alt={lp.title} />
             {/* info를 card 안으로! */}
             <div className="lp-info">
               <div className="lp-title">{lp.title}</div>
-              <div className="lp-content">{lp.content}</div>
+              <div className="lp-meta">
+                <span className="lp-date">📅 {lp.createdAt}</span>
+                <span className="lp-likes">❤️ {lp.likes || 0}</span>
+                {lp.content && <div className="lp-content">{lp.content}</div>}
+              </div>
             </div>
           </div>
         ))}
