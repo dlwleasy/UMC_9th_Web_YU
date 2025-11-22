@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./LPlist.css";
 import { useNavigate } from "react-router-dom";
+import useDebounce from "../hooks/useDebounce";
 
 export default function LPlist() {
   const [lpList, setLpList] = useState([]);
@@ -13,6 +14,9 @@ export default function LPlist() {
   const [loadingMore, setLoadingMore] = useState(false);
   //sort
   const [sort, setSort] = useState("latest"); //최신순으로 설정
+  //search
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const navigate = useNavigate();
 
@@ -26,7 +30,13 @@ export default function LPlist() {
     const fetchLP = async () => {
       setLoading(true);
       try {
-        const res = await axios(`http://localhost:8000/v1/lps?sort=${sort}`);
+        //url값 설정하기
+        let url = `http://localhost:8000/v1/lps?sort=${sort}`;
+        if (debouncedSearchTerm.trim()) {
+          url += `&search=${encodeURIComponent(debouncedSearchTerm.trim())}`;
+        }
+        const res = await axios(url);
+        // const res = await axios(`http://localhost:8000/v1/lps?sort=${sort}`);
         //axios.get("http://localhost:8000/v1/lps") 와 동일.get이 기본값
         //data.data.data;
         const lpArray = res.data.data.data;
@@ -42,7 +52,7 @@ export default function LPlist() {
       }
     };
     fetchLP();
-  }, [sort]);
+  }, [sort, debouncedSearchTerm]);
 
   //이거 안 하면 너무 복잡해짐
   const formatDate = (dateString) => {
@@ -97,7 +107,12 @@ export default function LPlist() {
           오래된순 ▼
         </button>
       </div>
-
+      {/* 검색 결과 표시 */}
+      {debouncedSearchTerm && (
+        <div className="search-info">
+          "{debouncedSearchTerm}" 검색 결과: {lpList.length}개
+        </div>
+      )}
       <div className="lp-grid">
         {lpList.map((lp) => (
           <div
