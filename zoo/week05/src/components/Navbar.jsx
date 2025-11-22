@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { apiInstance } from "../api/axios.js";
 import axios from "axios";
-// import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function Navbar() {
   const MoveToLogin = useNavigate();
@@ -26,6 +26,9 @@ export default function Navbar() {
   //     });
   //   }
   // }, []);
+
+  //상태 : 사이드바를 다루기 위해서 :밖에서 클릭해도 처리할 수 있게
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const sendToken = async () => {
     const Token = localStorage.getItem("accessToken");
@@ -108,6 +111,8 @@ export default function Navbar() {
           height="48"
           viewBox="0 0 48 48"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          style={{ cursor: "pointer" }}
         >
           <path
             fill="none"
@@ -118,6 +123,7 @@ export default function Navbar() {
             d="M7.95 11.95h32m-32 12h32m-32 12h32"
           />
         </svg>
+
         <h2 className="logo">돌려돌려LP판</h2>
 
         <span>
@@ -138,6 +144,16 @@ export default function Navbar() {
             </>
           )}
         </span>
+
+        <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+          <ul>
+            <li onClick={() => setIsSidebarOpen(false)}> 찾기 </li>
+            <li onClick={() => setIsSidebarOpen(false)}> 마이페이지 </li>
+          </ul>
+        </div>
+        {isSidebarOpen && (
+          <div className="overlay" onClick={() => setIsSidebarOpen()} />
+        )}
       </div>
     </>
   );
