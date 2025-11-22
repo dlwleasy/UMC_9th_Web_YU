@@ -44,6 +44,16 @@ export default function LPlist() {
     fetchLP();
   }, [sort]);
 
+  //이거 안 하면 너무 복잡해짐
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   // 더보기를 다루는 법
   const handleLoadMore = async () => {
     if (!hasNext || loadingMore) return; // 다음 페이지가 없거나 로딩 중이면 실행 안 함
@@ -103,9 +113,8 @@ export default function LPlist() {
             <div className="lp-info">
               <div className="lp-title">{lp.title}</div>
               <div className="lp-meta">
-                <span className="lp-date">📅 {lp.createdAt}</span>
+                <span className="lp-date">📅 {formatDate(lp.createdAt)}</span>
                 <span className="lp-likes">❤️ {lp.likes || 0}</span>
-                {lp.content && <div className="lp-content">{lp.content}</div>}
               </div>
             </div>
           </div>
