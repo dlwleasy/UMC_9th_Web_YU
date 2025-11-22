@@ -86,12 +86,11 @@
   cursor: not-allowed;
 }
 
-/*사이트바*/
-
+/* 사이드바 */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -280px;
+  left: -280px; /* 숨김 */
   width: 280px;
   height: 100vh;
   background-color: black;
@@ -100,13 +99,16 @@
   padding: 20px;
 }
 
-.sidebar-open {
-  left: 0; /*나타나게~*/
+/* 클래스 이름 수정! */
+.sidebar.open {
+  /* .sidebar-open이 아니라 .sidebar.open */
+  left: 0; /* 나타남 */
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar li {
@@ -116,17 +118,22 @@
   color: white;
 }
 
+.sidebar li:hover {
+  background-color: #333; /* 호버 효과 추가 */
+}
+
 .sidebar a {
   text-decoration: none;
   color: inherit;
 }
 
+/* 오버레이 */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(46, 46, 46);
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명하게 */
   z-index: 1000;
 }

@@ -152,7 +152,7 @@ export default function Navbar() {
           </ul>
         </div>
         {isSidebarOpen && (
-          <div className="overlay" onClick={() => setIsSidebarOpen()} />
+          <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
         )}
       </div>
     </>
