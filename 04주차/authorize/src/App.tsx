@@ -8,7 +8,7 @@ import Login from './pages/loginpage'
 import Register from './pages/register'
 import RegisterPW from './pages/registerPW';
 import RegisterProfile from './pages/registerProfile'
-import { AddLP } from './pages/addLP';
+import DetailsLP from './pages/detailsLP';
 import { SideBarProvider } from './components/contextapi';
 
 const router = createBrowserRouter([
@@ -35,6 +35,10 @@ const router = createBrowserRouter([
       {
         path : 'Profile',
         element : <RegisterProfile/>
+      },
+      {
+        path : 'LPdetails/:LPid',
+        element : <DetailsLP/>
       }
     ]
   }
