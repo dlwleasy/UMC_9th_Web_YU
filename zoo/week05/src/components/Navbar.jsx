@@ -144,17 +144,16 @@ export default function Navbar() {
             </>
           )}
         </span>
-
-        <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
-          <ul>
-            <li onClick={() => setIsSidebarOpen(false)}> 찾기 </li>
-            <li onClick={() => setIsSidebarOpen(false)}> 마이페이지 </li>
-          </ul>
-        </div>
-        {isSidebarOpen && (
-          <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
-        )}
       </div>
+      <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <ul>
+          <li onClick={() => setIsSidebarOpen(false)}> 찾기 </li>
+          <li onClick={() => setIsSidebarOpen(false)}> 마이페이지 </li>
+        </ul>
+      </div>
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </>
   );
 }

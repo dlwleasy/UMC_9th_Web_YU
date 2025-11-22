@@ -59,7 +59,7 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 60px;
+  width: 60px; /*여기서 이만큼은 얘껄로 두기*/
   height: 60px;
   border-radius: 50%; /* 원형 버튼 */
   background-color: #ff6cc2;
@@ -89,20 +89,21 @@
 /* 사이드바 */
 .sidebar {
   position: fixed;
-  top: 0;
-  left: -280px; /* 숨김 */
+  top: 60px;
+  left: -320px; /* 숨김 */
   width: 280px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background-color: black;
   transition: left 0.3s ease;
   z-index: 1001;
   padding: 20px;
 }
 
-/* 클래스 이름 수정! */
 .sidebar.open {
   /* .sidebar-open이 아니라 .sidebar.open */
-  left: 0; /* 나타남 */
+  left: 0; /* 나타남 : 전체의 왼쪽끝을 화면의 왼쪽 끝에 딱 맞추라는 명령 
+  2차원 평명좌표라고 생각하고 바를 어디에 맞추는지 생각해보면 0 이면 가장자리 왼쪽을 0,0에 넣는다고 생각할 수 있음
+  */
 }
 
 .sidebar ul {
@@ -130,10 +131,10 @@
 /* 오버레이 */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 30;
+  left: 30;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); /* 반투명하게 */
-  z-index: 1000;
+  z-index: 1000; /*기존의 모든 내용을 위에서 덮어*/
 }
