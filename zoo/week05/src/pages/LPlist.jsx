@@ -13,7 +13,7 @@ export default function LPlist() {
   const [hasNext, setHasNext] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   //sort
-  const [sort, setSort] = useState("latest"); //최신순으로 설정
+  const [sort, setSort] = useState("desc"); //최신순으로 설정
   //search
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -70,10 +70,16 @@ export default function LPlist() {
 
     setLoadingMore(true);
     try {
-      const res = await axios(
-        `http://localhost:8000/v1/lps?cursor=${nextCursor}&sort=${sort}`
-        //이거 안 하면 안됨
-      );
+      // ✅ 추가: 검색어도 포함
+      let url = `http://localhost:8000/v1/lps?cursor=${nextCursor}&sort=${sort}`;
+      if (debouncedSearchTerm.trim()) {
+        url += `&search=${encodeURIComponent(debouncedSearchTerm.trim())}`;
+      }
+      const res = await axios(url);
+      // const res = await axios(
+      //   `http://localhost:8000/v1/lps?cursor=${nextCursor}&sort=${sort}`
+      //   //이거 안 하면 안됨
+      // );
       const newLpArray = res.data.data.data;
 
       // 기존 리스트에 새로운 데이터 추가
@@ -92,48 +98,77 @@ export default function LPlist() {
   if (error) return <div> error! </div>;
   return (
     <div className="lp-page">
-      <div className="sort-buttons">
-        <button
-          onClick={() => setSort("latest")}
-          className={`sort-btn ${sort === "latest" ? "active" : ""}`}
-        >
-          최신순 ▼
-        </button>
+      <div className="controls">
+        {/*  추가: 검색 박스 */}
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="LP 검색..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          {searchTerm && (
+            <button className="clear-btn" onClick={() => setSearchTerm("")}>
+              ✕
+            </button>
+          )}
+        </div>
 
-        <button
-          onClick={() => setSort("oldest")}
-          className={`sort-btn ${sort === "oldest" ? "active" : ""}`}
-        >
-          오래된순 ▼
-        </button>
+        <div className="sort-buttons">
+          <button
+            onClick={() => setSort("desc")}
+            className={`sort-btn ${sort === "desc" ? "active" : ""}`}
+          >
+            최신순 ▼
+          </button>
+
+          <button
+            onClick={() => setSort("asc")}
+            className={`sort-btn ${sort === "asc" ? "active" : ""}`}
+          >
+            오래된순 ▼
+          </button>
+        </div>
       </div>
+
       {/* 검색 결과 표시 */}
       {debouncedSearchTerm && (
         <div className="search-info">
           "{debouncedSearchTerm}" 검색 결과: {lpList.length}개
         </div>
       )}
+
       <div className="lp-grid">
-        {lpList.map((lp) => (
-          <div
-            className="lp-card"
-            key={lp.id}
-            onClick={() => handleCardClick(lp.id)}
-          >
-            {" "}
-            <div className="lp-overlay"></div>
-            {/* key는 최상위에! */}
-            <img src={lp.thumbnail} alt={lp.title} />
-            {/* info를 card 안으로! */}
-            <div className="lp-info">
-              <div className="lp-title">{lp.title}</div>
-              <div className="lp-meta">
-                <span className="lp-date">📅 {formatDate(lp.createdAt)}</span>
-                <span className="lp-likes">❤️ {lp.likes || 0}</span>
+        {/*  추가: 결과 없을 때 메시지 */}
+        {lpList.length === 0 ? (
+          <div className="no-results">
+            {debouncedSearchTerm.trim()
+              ? "검색 결과가 없습니다."
+              : "LP가 없습니다."}
+          </div>
+        ) : (
+          lpList.map((lp) => (
+            <div
+              className="lp-card"
+              key={lp.id}
+              onClick={() => handleCardClick(lp.id)}
+            >
+              {" "}
+              <div className="lp-overlay"></div>
+              {/* key는 최상위에! */}
+              <img src={lp.thumbnail} alt={lp.title} />
+              {/* info를 card 안으로! */}
+              <div className="lp-info">
+                <div className="lp-title">{lp.title}</div>
+                <div className="lp-meta">
+                  <span className="lp-date">📅 {formatDate(lp.createdAt)}</span>
+                  <span className="lp-likes">❤️ {lp.likes || 0}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* hasNext가 true일 때만 버튼 표시 */}
