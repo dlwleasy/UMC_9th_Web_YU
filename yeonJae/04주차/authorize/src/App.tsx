@@ -8,11 +8,8 @@ import Login from './pages/loginpage'
 import Register from './pages/register'
 import RegisterPW from './pages/registerPW';
 import RegisterProfile from './pages/registerProfile'
-import DetailsLP from './pages/detailsLP';
+import { AddLP } from './pages/addLP';
 import { SideBarProvider } from './components/contextapi';
-import { LoginProvider } from './components/contextapi';
-import CommentSection from './pages/comment';
-
 
 const router = createBrowserRouter([
   {
@@ -38,14 +35,6 @@ const router = createBrowserRouter([
       {
         path : 'Profile',
         element : <RegisterProfile/>
-      },
-      {
-        path : 'LPdetails/:LPid',
-        element : <DetailsLP/>
-      },
-      {
-        path : '/:LPid',
-        element: <CommentSection/>
       }
     ]
   }
@@ -55,7 +44,6 @@ const client = new QueryClient()
 
 function App() {
   return (
-  <LoginProvider>
     <SideBarProvider>
       <QueryClientProvider client={client}>
         <RouterProvider router={router}>
@@ -63,8 +51,6 @@ function App() {
         </RouterProvider>
       </QueryClientProvider>
     </SideBarProvider>
-  </LoginProvider>
-    
     
     
   )
