@@ -1,4 +1,4 @@
-import React, { createContext, useContext, type ReactNode } from "react"
+import React, { createContext, useContext, useEffect, type ReactNode } from "react"
 import { useState } from "react"
 
 
@@ -18,6 +18,8 @@ export function SideBarProvider({children}:{children:ReactNode}) {
         </SideBarContext.Provider>
     )
 }
+
+//간편하게 사용하기 위해 useContext를 여기다 씀.
 export function useSidebar() {
   const context = useContext(SideBarContext);
   if (!context) {
@@ -25,4 +27,54 @@ export function useSidebar() {
     throw new Error('Cannot use useSidebar outside of SidebarProvider');
   }
   return context;
+}
+
+//여기서 부터 로그인 관리 컨텍스트
+interface AuthContextType {
+  isLogin: boolean;
+  userName : string|null;
+  loginProc: (token: string, name: string) => void;
+  logoutProc : () => void;
+}
+export const LoginContext = createContext<AuthContextType|null>(null)
+
+export function LoginProvider({children}:{children:ReactNode}) {
+
+  const [isLogin, setIsLogin] = useState(false)
+  const [userName, setUserName] = useState<string|null>('')
+  //useEffect를 한 이유: 새로고침을 할 경우 로그인 상태가 풀리게 된다.(useState의 특성 때문이야) 따라서 토큰이 있다면 새로고침을 하더라도 유지가 되도록 만든 장치
+  useEffect(()=>{
+    const Token = localStorage.getItem('accessToken');
+    const name= localStorage.getItem('userName');
+    if (Token) {
+      console.log('토큰 있음!')
+      setIsLogin(true)
+      setUserName(name)
+    }else {
+      console.log('토큰 없음...')
+      setIsLogin(false)
+    }
+  },[])
+  // 중요한 포인트는 로그인 버튼 을 눌렀을때, true, 로그아웃 버튼을 눌렀을때, false로 처리하기 위해 따로 만들어준 함수
+  const loginProc = (token:string, name:string) => {
+    localStorage.setItem('accessToken', token);
+    localStorage.setItem('userName', name);
+    setIsLogin(true);
+    setUserName(name);
+  };
+
+  
+  const logoutProc = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('status'); 
+    localStorage.removeItem('logout'); 
+    setIsLogin(false);
+    setUserName('');
+  };
+  return (
+    <LoginContext.Provider value={{ isLogin, userName, loginProc, logoutProc }}>
+      {children}
+    </LoginContext.Provider>
+  )
 }

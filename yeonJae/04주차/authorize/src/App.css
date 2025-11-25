@@ -109,7 +109,7 @@ main {
     grid-template-rows: repeat(auto-fit, 200px);
     gap: 25px
 }
-.show-LP > img{
+.LP_bowls > img{
     width: 200px;
     height: 200px;
 }
@@ -201,4 +201,347 @@ main {
     height: 150px;
     border-radius: 50%; /* 원형으로 만들기 */
     object-fit: cover;
+}
+
+.NavBar-button > svg {
+    color: aliceblue;
+}
+
+.NavBar-button {
+    border: none;
+}
+
+.Swiching_Button {
+    position: fixed;
+    left: 85vw;
+    bottom: 50vh;
+
+}
+
+.simple_LP_info {
+    position: absolute;
+    width:100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.LP_bowls{
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+/* 전체 배경 (화면 중앙 정렬용) */
+.app-container {
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 카드 메인 컨테이너 */
+.music-card {
+  background-color: #23272f; /* 어두운 회색 배경 */
+  width: 400px;
+  padding: 24px;
+  border-radius: 20px;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+/* 1. 헤더 (유저 정보 + 시간) */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #cccccc;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #5ca08e; /* 프로필 기본색 */
+}
+
+.username {
+  font-weight: 600;
+  color: #fff;
+}
+
+/* 2. 타이틀 영역 */
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.song-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.icon-group {
+  display: flex;
+  gap: 10px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* 3. CD (앨범 커버) 영역 */
+.cd-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  position: relative;
+}
+
+.cd-case-shadow {
+  /* CD 뒤의 네모난 그림자 배경 */
+  width: 260px;
+  height: 260px;
+  background-color: #1a1d23;
+  border-radius: 12px;
+  position: absolute;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.cd-disc {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%; /* 원형 만들기 */
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.album-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CD 가운데 구멍 */
+.center-hole {
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border: 2px solid #ddd;
+}
+
+/* 4. 설명 텍스트 */
+.description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #cccccc;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+/* 5. 태그 영역 */
+.tags-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.tag {
+  background-color: #353a45;
+  color: #aeb5bc;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 6. 좋아요 푸터 */
+.card-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.heart-icon {
+  color: #ff4d6d; /* 핑크색 */
+}
+
+/* CommentSection.css */
+
+/* 전체 컨테이너 */
+.comment-container {
+  background-color: #1e1f22; /* 배경색: 짙은 회색 (디스코드/유튜브 느낌) */
+  color: #ffffff;
+  width: 100%;
+  max-width: 600px; /* 너비 제한 */
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+/* 1. 헤더 영역 (제목 + 정렬 버튼) */
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.comment-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sort-buttons {
+  display: flex;
+  background-color: #2b2d31;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #3f4145;
+}
+
+.sort-btn {
+  background: transparent;
+  border: none;
+  color: #b5bac1;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sort-btn:hover {
+  color: #fff;
+}
+
+/* 활성화된 버튼 스타일 (흰색 배경) */
+.sort-btn.active {
+  background-color: #e3e5e8;
+  color: #000;
+  font-weight: bold;
+}
+
+/* 2. 입력창 영역 */
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.comment-input {
+  flex: 1;
+  background-color: #2b2d31; /* 입력창 배경 */
+  border: 1px solid #3f4145;
+  border-radius: 4px;
+  padding: 12px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.comment-input::placeholder {
+  color: #949ba4;
+}
+
+.comment-input:focus {
+  border-color: #5865f2; /* 포커스 시 강조색 */
+}
+
+.submit-btn {
+  background-color: #4e5058;
+  color: #fff;
+  border: none;
+  padding: 0 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.submit-btn:hover {
+  background-color: #6d6f78;
+}
+
+/* 3. 댓글 리스트 */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* 댓글 사이 간격 */
+  overflow-y: scroll;
+}
+
+.comment-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* 아바타 이미지 */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0; /* 크기 줄어들지 않게 고정 */
+}
+
+/* 댓글 내용 */
+.comment-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f2f3f5;
+}
+
+.comment-text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #dbdee1;
+}
+
+/* 옵션 메뉴 (점 3개) - 마우스 올렸을 때만 보이게 하려면 opacity 조절 */
+.more-options {
+  color: #b5bac1;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.more-options:hover {
+  color: #fff;
 }
