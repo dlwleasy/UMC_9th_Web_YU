@@ -1,7 +1,6 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import { LoginContext } from "../components/contextapi";
 const Login = () => {
     const [ID, setID] = useState('')
     
@@ -12,7 +11,6 @@ const Login = () => {
         const Value_ID = e.target.value;
         setID(Value_ID);
     }
-    const Authcontext = useContext(LoginContext)
 
     const [Password, setPassword] = useState('')
 
@@ -31,10 +29,10 @@ const Login = () => {
             function (response) {
                 const {accessToken, refreshToken} = response.data.data;
                 console.log(response,accessToken,refreshToken)
-                localStorage.clear()
+                localStorage.setItem('userName',response.data.data.name)
+                localStorage.setItem('IsLoginned',response.data.data.status)
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
-                Authcontext?.loginProc(accessToken,response.data.data.name)
                 navigateForsuccessLogin('/')
             }
         ).catch(function (response){
