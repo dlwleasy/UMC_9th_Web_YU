@@ -1,0 +1,245 @@
+/* LPlist.css */
+
+.lp-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 앨범 커버 그리드 */
+.lp-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(160px, 1fr)
+  ); /* 가로 여러 칸 */
+  gap: 8px; /* 카드 사이 간격 */
+}
+
+/* 각각의 앨범 카드 */
+.lp-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 호버 시 확대 + 그림자 강화 */
+.lp-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* 이미지 */
+.lp-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* 호버 시 이미지 약간 확대 */
+.lp-card:hover img {
+  transform: scale(1.1);
+}
+
+/* 오버레이 배경 (어둡게) */
+.lp-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* 호버 시 오버레이 보이기 */
+.lp-card:hover .lp-overlay {
+  opacity: 1;
+}
+
+/* 메타 정보 영역 */
+.lp-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+/* 호버 시 정보 나타나기 */
+.lp-card:hover .lp-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 제목 */
+.lp-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 2줄 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 메타 정보 (날짜, 좋아요) */
+.lp-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.lp-date,
+.lp-likes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 설명 */
+.lp-content {
+  font-size: 13px;
+  opacity: 0.8;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 2줄 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px; /*여기서 이만큼은 얘껄로 두기*/
+  height: 60px;
+  border-radius: 50%; /* 원형 버튼 */
+  background-color: #ff6cc2;
+  color: white;
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+  z-index: 1000; /* 다른 요소 위에 표시 */
+  transition: all 0.3s ease;
+}
+
+.floating-btn:hover {
+  background-color: #ff8eec;
+  transform: scale(1.1); /* 마우스 올리면 살짝 커짐 */
+}
+
+.floating-btn:active {
+  transform: scale(0.95); /* 클릭하면 살짝 작아짐 */
+}
+
+.floating-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 사이드바 */
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: -320px; /* 숨김 */
+  width: 280px;
+  height: calc(100vh - 60px);
+  background-color: black;
+  transition: left 0.3s ease;
+  z-index: 1001;
+  padding: 20px;
+}
+
+.sidebar.open {
+  /* .sidebar-open이 아니라 .sidebar.open */
+  left: 0; /* 나타남 : 전체의 왼쪽끝을 화면의 왼쪽 끝에 딱 맞추라는 명령 
+  2차원 평명좌표라고 생각하고 바를 어디에 맞추는지 생각해보면 0 이면 가장자리 왼쪽을 0,0에 넣는다고 생각할 수 있음
+  */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 12px 0;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  color: white;
+}
+
+.sidebar li:hover {
+  background-color: #333; /* 호버 효과 추가 */
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 오버레이 */
+.overlay {
+  position: fixed;
+  top: 30;
+  left: 30;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명하게 */
+  z-index: 1000; /*기존의 모든 내용을 위에서 덮어*/
+}
+
+.sort-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.sort-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.sort-btn.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.sort-btn:not(.active) {
+  background-color: #ddd;
+  color: #333;
+}
+
+.sort-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
