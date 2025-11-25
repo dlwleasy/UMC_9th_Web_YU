@@ -32,7 +32,7 @@ export const GETLP = (item:props) => {
 
 
     //카드에 띄울 정보를 가져오는 함수 (contextapi 파일에 있어)
-    const {data, isLoading, isError, error} =GetLPdetails(item.item.id)
+    const {data} =GetLPdetails(item.item.id)
 
     //확인용 로그
     console.log('LP 상세정보 From GETLP',data)

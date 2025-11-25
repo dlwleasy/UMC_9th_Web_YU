@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom"
 import { GetLPdetails } from "../hooks/ToggleHook"
-import Skeleton from '@mui/material/Skeleton';
+
 
 
 const DetailsLP= () => {
 
     const {LPid} = useParams()
     console.log('현재 받은 아이디 From detailsLP : ',LPid)
-    const {data, isLoading, isError, error} =GetLPdetails(LPid)
+    const {data} =GetLPdetails(LPid)
     const Like = data?.data.data.like ?? 0
     const CreatedAT = data?.data.data.createdAt
     const dateObj = new Date(CreatedAT)
