@@ -47,8 +47,12 @@ export function LoginProvider({children}:{children:ReactNode}) {
     const Token = localStorage.getItem('accessToken');
     const name= localStorage.getItem('userName');
     if (Token) {
+      console.log('토큰 있음!')
       setIsLogin(true)
       setUserName(name)
+    }else {
+      console.log('토큰 없음...')
+      setIsLogin(false)
     }
   },[])
   // 중요한 포인트는 로그인 버튼 을 눌렀을때, true, 로그아웃 버튼을 눌렀을때, false로 처리하기 위해 따로 만들어준 함수

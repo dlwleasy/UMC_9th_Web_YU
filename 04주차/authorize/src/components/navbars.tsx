@@ -16,7 +16,7 @@ const navbars = () => {
     
     //컨텍스트로 로그인 여부를 표현한다. why? 구성이 현재 로그아웃과 로그인의 처리가 한곳에 있지 않기 때문에 하나로 모아주는 것이 편하다고 판단. (contextapi에 있어)
     const Authcontext = useContext(LoginContext)
-
+    console.log('로그인이 되었는가? : ',Authcontext?.isLogin)
     const login =useNavigate()
     const register =useNavigate()
     const MoveToLogin = useNavigate()
