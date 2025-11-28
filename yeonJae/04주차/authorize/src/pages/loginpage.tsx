@@ -1,16 +1,18 @@
 import { useState } from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { LoginContext } from "../components/contextapi";
 const Login = () => {
     const [ID, setID] = useState('')
-    
-    const navigateForsuccessLogin = useNavigate();
 
+    const navigateForsuccessLogin = useNavigate();
     const navigate = useNavigate();
     const handleIDCheck = (e:any) => {
         const Value_ID = e.target.value;
         setID(Value_ID);
     }
+    const Authcontext = useContext(LoginContext)
 
     const [Password, setPassword] = useState('')
 
@@ -18,28 +20,28 @@ const Login = () => {
         const Value_password = e.target.value;
         setPassword(Value_password)
     }
-
     const ID_OK : boolean= (ID.includes('@') && ID.includes('.'))
     const PW_OK : boolean = (Password.length >= 6)
     const isbothOK = ID_OK && PW_OK
-
     const getToken = async () => {
         const SingInURL = 'http://localhost:8000/v1/auth/signin';
         axios.post(SingInURL,{'email':ID,'password':Password}).then(
             function (response) {
                 const {accessToken, refreshToken} = response.data.data;
                 console.log(response,accessToken,refreshToken)
+                localStorage.clear()
                 localStorage.setItem('userName',response.data.data.name)
-                localStorage.setItem('IsLoginned',response.data.data.status)
+                localStorage.setItem('login',response.data.status)
+                console.log(response.data.status)
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
+                Authcontext?.loginProc(accessToken,response.data.data.name)
                 navigateForsuccessLogin('/')
             }
         ).catch(function (response){
             console.log('로그인 시도중 에러 발생:', response)
         })
     }
-
     return (
         <main>
             <section className="login_container">
@@ -61,6 +63,4 @@ const Login = () => {
         </main>
     )
 }
-
-
 export default Login

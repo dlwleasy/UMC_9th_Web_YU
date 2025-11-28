@@ -6,8 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 
 const RegisterPW = () => {
-    const navigateToback = useNavigate();
-    const navigatesendPW = useNavigate();
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -29,13 +27,13 @@ const RegisterPW = () => {
 
     const navigateToProfile = () => {
         navigate('/Profile');
-        navigatesendPW('/Profile', {state:{email:Email,password:Password}})
+        navigate('/Profile', {state:{email:Email,password:Password}})
     };
     return (
         <main>
             <section className="login_container">
                 <div>
-                    <button className="Button-back" onClick={() => navigateToback(-1)}>&lt;</button>
+                    <button className="Button-back" onClick={() => navigate(-1)}>&lt;</button>
                     <span>로그인</span>
                 </div>
                 <button className="google_login">구글 로그인</button>
