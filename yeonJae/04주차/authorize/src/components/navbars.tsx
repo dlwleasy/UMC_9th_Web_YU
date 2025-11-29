@@ -14,7 +14,7 @@ const navbars = () => {
 
     const Name = localStorage.getItem('userName')
 
-    //클릭시 true, false로 바뀌게 하였다 (나머지 처리는 root-layout 파일에 있어)
+    //클릭시 true, false로 바뀌게 하였다 (나머지 처리는 root-layout 파일에)
     const SideBarOpen = () => {
         setOpen(!isOpen)
     }

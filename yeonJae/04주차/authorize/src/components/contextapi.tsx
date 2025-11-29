@@ -39,7 +39,7 @@ export function LoginProvider({children}:{children:ReactNode}) {
 
   const [isLogin, setIsLogin] = useState(false)
   const [userName, setUserName] = useState<string|null>('')
-  //useEffect를 한 이유: 새로고침을 할 경우 로그인 상태가 풀리게 된다.(useState의 특성 때문이야) 따라서 토큰이 있다면 새로고침을 하더라도 유지가 되도록 만든 장치
+  //useEffect를 한 이유: 새로고침을 할 경우 로그인 상태가 풀리게 된다. 따라서 토큰이 있다면 새로고침을 하더라도 유지가 되도록 만든 장치
   useEffect(()=>{
     const Token = localStorage.getItem('accessToken');
     const name= localStorage.getItem('userName');

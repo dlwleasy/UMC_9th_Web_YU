@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ValidateID, ValidatePW, getToken } from "./Hooks";
+import { ValidateID, ValidatePW, useToken } from "./Hooks";
 
 
 const Login = () => {
@@ -8,7 +8,10 @@ const Login = () => {
     const {Password, handlePasswordCheck} = ValidatePW()
 
     const navigate = useNavigate();
+
+    const {getToken} = useToken()
     
+
     const ID_OK : boolean= (ID.includes('@') && ID.includes('.'))
     const PW_OK : boolean = (Password.length >= 6)
     const isbothOK = ID_OK && PW_OK
@@ -28,7 +31,7 @@ const Login = () => {
                 {PW_OK == false && (
                     <span className="alert PassWord">비밀번호는 6자리 이상인지 확인하십시오.</span>
                 )}
-                <button className="login" disabled={!isbothOK} onClick={()=> getToken(ID,Password)}>로그인</button>
+                <button className="login" disabled={!isbothOK} onClick={()=>getToken(ID,Password)}>로그인</button>
             </section>
         </main>
     )

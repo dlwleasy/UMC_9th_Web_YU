@@ -16,7 +16,7 @@ async function fetchLP({pageParam=1,sort}:{pageParam?:number,sort?:'asc' | 'desc
 }
 export default function Infinite() {
     const { ref, inView } = useInView();
-    const [isHovered, setHover] = useState<any>(false)
+    
     const [checked, setCheck] = useState(false)
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         setCheck(e.target.checked)
@@ -47,6 +47,7 @@ export default function Infinite() {
             <Switch className="Swiching_Button" onChange={handleChange} checked={checked}></Switch>
             <div className='show-LP_container'>
                     <div className='show-LP'>
+                        {/* 보여주고자 하는 스켈레톤 어레이로 만들기*/}
                         {isLoading? Array.from(new Array(10)).map((_,index)=><Skeleton animation="wave" variant="rectangular" key={index} width={200} height={200} sx={{ bgcolor: 'grey.400' }}/>):data?.pages.map((page,i)=>(
                             page.data.data.map((item: { id: Key | null | undefined; thumbnail: any; },j: any)=>(
                                 <GETLP item={item}>

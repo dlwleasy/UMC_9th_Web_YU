@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 export function getdata(LPid:number|any) {
 
     const {data} =GetLPdetails(LPid)
-
+    const data_LP = data
     const Like = data?.data.data.like ?? 0
 
     const CreatedAT = data?.data.data.createdAt
@@ -18,7 +18,7 @@ export function getdata(LPid:number|any) {
         month : 'long',
         day: 'numeric'
     })
-    return {data, Like, prettireFromet_date}
+    return {data_LP, Like, prettireFromet_date}
 }
 
 
@@ -46,11 +46,11 @@ export function ValidatePW() {
 }
 
 
-
-
-export const getToken = async (ID:string,PassWord:string) => {
+export const useToken = () => {
     const navigate = useNavigate()
     const Authcontext = useContext(LoginContext)
+    const getToken = async (ID:string,PassWord:string) => {
+    
     const SingInURL = 'http://localhost:8000/v1/auth/signin';
     axios.post(SingInURL,{'email':ID,'password':PassWord}).then(
             function (response) {
@@ -66,6 +66,8 @@ export const getToken = async (ID:string,PassWord:string) => {
             console.log('로그인 시도중 에러 발생:', response)
         })
     }
+    return {getToken}
+}
 
 export function getRegisterInfo(name:string,email:string,password:string) {
     const SendRegisterInfo = async () => {

@@ -47,3 +47,36 @@ export interface LpDetail {
 
 // 최종 응답 타입
 export type LpDetailResponse = ApiResponse<LpDetail>;
+
+export interface Author {
+  id: number
+  name: string
+  email: string
+  bio: string | null
+  avatar: string | null
+  createdAt: string  // ISO 날짜 문자열
+  updatedAt: string  // ISO 날짜 문자열
+}
+
+export interface CommentItem {
+  id: number
+  content: string
+  lpId: number
+  authorId: number
+  createdAt: string  // ISO 날짜 문자열
+  updatedAt: string  // ISO 날짜 문자열
+  author: Author
+}
+
+export interface CommentListData {
+  data: CommentItem[]
+  nextCursor: number
+  hasNext: boolean
+}
+
+export interface CommentListResponse {
+  status: boolean
+  statusCode: number
+  message: string
+  data: CommentListData
+}
