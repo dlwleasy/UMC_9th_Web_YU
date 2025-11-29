@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom"
 
 const Register = () => {
     const [Value_ID, setID] = useState('')
-    
-    
 
     const handleIDCheck = (e:any) => {
         const Value_ID = e.target.value;
@@ -16,20 +14,18 @@ const Register = () => {
 
     const IDoggle = (Value_ID.includes('@') && Value_ID.includes('.'))
 
-    const navigateSendID = useNavigate()
-    const navigateToback = useNavigate()
     const navigate = useNavigate();
 
     const navigateToPW = () => {
         navigate('/PW');
-        navigateSendID('/PW', {state : {Email:Value_ID}});
+        navigate('/PW', {state : {Email:Value_ID}});
     };
 
     return (
         <main>
             <section className="login_container">
                 <div>
-                    <button className="Button-back" onClick={() => navigateToback(-1)}>&lt;</button>
+                    <button className="Button-back" onClick={() => navigate(-1)}>&lt;</button>
                     <span>회원가입</span>
                 </div>
                 <button className="google_login">구글 로그인</button>
