@@ -116,11 +116,7 @@ export default function LPlist() {
       data.append("tags", formData.tags);
       data.append("thumbnail", formData.thumbnail);
 
-      await axios.post("http://localhost:8000/v1/lps", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post("http://localhost:8000/v1/lps", data);
 
       alert("LP가 등록되었습니다!");
       setIsModalOpen(false);

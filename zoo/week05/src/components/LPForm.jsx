@@ -9,19 +9,23 @@ export default function LPForm({ onSubmit, onClose }) {
     tags: "",
     thumbnail: null,
   });
+  //객체로 지정해서 useState여러개 안 해도 사용할 수 있게함
+
   const [preview, setPreview] = useState(null);
 
   const handleImageChange = (e) => {
+    //파일 꺼내기-1개만
     const file = e.target.files[0];
     if (file) {
       setFormData({ ...formData, thumbnail: file });
 
-      // 미리보기
-      const reader = new FileReader();
+      // 미리보기 - 알맞는 이미지인지 확인하기 위함
+      const reader = new FileReader(); //브라우저용-파일을 읽어서 디지털 이미지 파일로 변환해서 만들어주는 것
       reader.onloadend = () => {
+        //이 과정을 완료했다는 것을 알려줌- 일이 다 끝났을때 실행하는 함수
         setPreview(reader.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); //읽기 시작하는 것,서버에 올리지 않고
     }
   };
 
