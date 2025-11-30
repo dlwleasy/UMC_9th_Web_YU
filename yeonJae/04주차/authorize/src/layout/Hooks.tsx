@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 
-function Open_Close() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+function Open_Close(init:boolean=false) {
+    const [isModalOpen, setIsModalOpen] = useState(init);
 
   // 1. 사이드 여는 함수(+ 버튼 관련이야)
     const openModal = () => {
