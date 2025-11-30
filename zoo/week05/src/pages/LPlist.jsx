@@ -76,7 +76,7 @@ export default function LPlist() {
 
     setLoadingMore(true);
     try {
-      // ✅ 추가: 검색어도 포함
+      // 추가: 검색어도 포함
       let url = `http://localhost:8000/v1/lps?cursor=${nextCursor}&sort=${sort}`;
       if (debouncedSearchTerm.trim()) {
         url += `&search=${encodeURIComponent(debouncedSearchTerm.trim())}`;
