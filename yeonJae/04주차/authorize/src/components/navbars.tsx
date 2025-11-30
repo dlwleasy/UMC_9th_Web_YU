@@ -21,7 +21,6 @@ const navbars = () => {
 
     //컨텍스트로 로그인 여부를 표현한다. why? 구성이 현재 로그아웃과 로그인의 처리가 한곳에 있지 않기 때문에 하나로 모아주는 것이 편하다고 판단. (contextapi에 있어)
     const Authcontext = useContext(LoginContext)
-
     const Navigate =useNavigate()
     const sendToken = async() => {
         const Token = localStorage.getItem('accessToken')
@@ -84,7 +83,7 @@ const navbars = () => {
                             <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M7.95 11.95h32m-32 12h32m-32 12h32"/></svg>        
                         </button>
                     
-                    <h1>LP</h1>
+                    <h1 onClick={()=>Navigate('/')}>LP</h1>
                 </span>
 
                 <span className="NavBar-Buttons_container">
