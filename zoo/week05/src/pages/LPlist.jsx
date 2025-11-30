@@ -3,6 +3,8 @@ import axios from "axios";
 import "./LPlist.css";
 import { useNavigate } from "react-router-dom";
 import useDebounce from "../hooks/useDebounce";
+import Modal from "../components/Modal";
+import LPForm from "../components/LPForm";
 
 export default function LPlist() {
   const [lpList, setLpList] = useState([]);
@@ -16,6 +18,8 @@ export default function LPlist() {
   const [sort, setSort] = useState("desc"); //최신순으로 설정
   //search
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const navigate = useNavigate();
@@ -102,6 +106,31 @@ export default function LPlist() {
 
   if (loading) return <div>loading..</div>;
   if (error) return <div> error! </div>;
+
+  const handleSubmit = async (formData) => {
+    try {
+      // FormData 생성 (파일 업로드용)
+      const data = new FormData();
+      data.append("title", formData.title);
+      data.append("content", formData.content);
+      data.append("tags", formData.tags);
+      data.append("thumbnail", formData.thumbnail);
+
+      await axios.post("http://localhost:8000/v1/lps", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      alert("LP가 등록되었습니다!");
+      setIsModalOpen(false);
+      // LP 목록 새로고침 로직 추가
+    } catch (err) {
+      console.error(err);
+      alert("등록 실패");
+    }
+  };
+
   return (
     <div className="lp-page">
       <div className="controls">
@@ -136,6 +165,18 @@ export default function LPlist() {
             오래된순 ▼
           </button>
         </div>
+      </div>
+
+      <div>
+        <button onClick={() => setIsModalOpen(true)}>LP 등록</button>
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          {/*children 이 컴포넌트를 모달에 넣어줄 수 있음 - 그래서 렌더링됨*/}
+          <LPForm
+            onSubmit={handleSubmit}
+            onClose={() => setIsModalOpen(false)}
+          />
+        </Modal>
       </div>
 
       {/* 검색 결과 표시 */}
