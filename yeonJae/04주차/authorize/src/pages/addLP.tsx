@@ -19,7 +19,7 @@ export const AddLP = ({ close }: { close: () => void }) => {
 
           <div className="image-wrapper">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/10492/10492476.png"
+              src={recordImage}
               alt="Vinyl Record"
               className="lp-record-img"
             ></img>
