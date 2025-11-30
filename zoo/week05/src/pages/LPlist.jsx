@@ -22,6 +22,12 @@ export default function LPlist() {
 
   //주소창 이동시킴
   const handleCardClick = (lpId) => {
+    const isLogin = Boolean(localStorage.getItem("IsLoginned"));
+
+    if (!isLogin) {
+      alert("로그인이 필요한 페이지입니다.");
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    }
     navigate(`/lp/${lpId}`);
   };
 
