@@ -681,3 +681,143 @@ body {
 .submit-btn:hover {
   background-color: #db2777;
 }
+
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #000; /* 전체 배경 검은색 */
+      color: #fff; /* 기본 글자색 흰색 */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px; /* 너무 넓어지지 않게 중앙 정렬 */
+      padding: 20px;
+    }
+
+    /* 2. 프로필 헤더 영역 */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      padding: 40px 0;
+      position: relative;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      background-color: #ddd; /* 이미지 없을 때 회색 */
+      border-radius: 50%; /* 원형으로 만들기 */
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    .user-info h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .user-info p.role {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 5px;
+    }
+
+    .user-info p.email {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .settings-icon {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #fff;
+    }
+
+    /* 3. 탭 메뉴 영역 */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #333;
+      margin-bottom: 20px;
+    }
+
+    .tab-item {
+      padding: 10px 20px;
+      cursor: pointer;
+      color: #555;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .tab-item.active {
+      color: #fff;
+    }
+
+    /* 활성화된 탭 밑줄 효과 */
+    .tab-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; /* 선 위에 겹치게 */
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+    }
+
+    /* 4. 필터(정렬) 버튼 영역 */
+    .filter-bar {
+      display: flex;
+      justify-content: flex-end; /* 오른쪽 정렬 */
+      margin-bottom: 20px;
+    }
+
+    .sort-buttons {
+      display: flex;
+      border: 1px solid #555;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .sort-btn {
+      background: #000;
+      color: #888;
+      border: none;
+      padding: 5px 15px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .sort-btn.active {
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* 5. 이미지 갤러리 영역 */
+    .gallery {
+      display: grid;
+      /* 화면 크기에 따라 자동으로 열 개수 조절 (반응형) */
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .gallery-item {
+      width: 100%;
+      aspect-ratio: 1 / 1; /* 정사각형 비율 유지 */
+      object-fit: cover;
+      background-color: #333;
+      border-radius: 4px;
+    }

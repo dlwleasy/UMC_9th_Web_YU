@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getdata } from "./Hooks";
+import { createComment, getdata, ValidateContent } from "./Hooks";
 import { Infinte_get_Comment } from "../hooks/ToggleHook";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -9,7 +9,8 @@ import Stack from "@mui/material/Stack";
 const Comment_detailsLP = () => {
   const { LPid } = useParams();
   const { ref, inView } = useInView();
-
+  const {Content, handlecontentCheck} = ValidateContent()
+  console.log('댓글 확인', Content)
   const { data_LP, prettireFromet_date, Like } = getdata(LPid);
   console.log("LP 데이터", data_LP, "지금 아이디", LPid);
   const [checked, setSortOrder] = useState(false); // 'latest' | 'oldest'
@@ -138,9 +139,10 @@ const Comment_detailsLP = () => {
             <input
               type="text"
               className="comment-input"
+              onChange={handlecontentCheck}
               placeholder="댓글을 입력해주세요"
             />
-            <button className="submit-btn_comment">작성</button>
+            <button className="submit-btn_comment" onClick={() => createComment(Number(LPid),Content)}>작성</button>
           </div>
           <div className="comment-container_list">
             {isLoading

@@ -22,9 +22,7 @@ const navbars = () => {
     //컨텍스트로 로그인 여부를 표현한다. why? 구성이 현재 로그아웃과 로그인의 처리가 한곳에 있지 않기 때문에 하나로 모아주는 것이 편하다고 판단. (contextapi에 있어)
     const Authcontext = useContext(LoginContext)
 
-    const login =useNavigate()
-    const register =useNavigate()
-    const MoveToLogin = useNavigate()
+    const Navigate =useNavigate()
     const sendToken = async() => {
         const Token = localStorage.getItem('accessToken')
         const GetMyInfo = '/v1/users/me'
@@ -48,7 +46,7 @@ const navbars = () => {
                 }
             )
             Authcontext?.logoutProc()
-            MoveToLogin('/login')
+            Navigate('/login')
         })
     }
     
@@ -98,8 +96,8 @@ const navbars = () => {
                     <button onClick={LogOut}>로그아웃</button>
                     </>:
                     <>
-                    <button onClick={()=>login('/login')}>로그인</button>
-                    <button onClick={()=>register('/ID')}>회원가입</button>
+                    <button onClick={()=>Navigate('/login')}>로그인</button>
+                    <button onClick={()=>Navigate('/ID')}>회원가입</button>
                     </>}
                 </span>
             </nav>

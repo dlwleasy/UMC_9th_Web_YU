@@ -11,6 +11,7 @@ import RegisterProfile from "./pages/registerProfile";
 import Comment_detailsLP from "./pages/comment&detailsLP";
 import { LoginProvider } from "./components/contextapi";
 import { SideBarProvider } from "./components/contextapi";
+import Mypage from "./pages/Mypage";
 
 
 const router = createBrowserRouter([
@@ -42,7 +43,10 @@ const router = createBrowserRouter([
         path: "LPdetails/:LPid",
         element: <Comment_detailsLP />,
       },
-  
+      {
+        path:'Mypage',
+        element:<Mypage/>
+      }
     ],
   },
 ]);

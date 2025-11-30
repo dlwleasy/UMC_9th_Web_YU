@@ -1,9 +1,11 @@
 import { useState } from "react";
 import recordImage from "../img/e278ed6d-4722-4e6d-bd30-7815c5b10c15.jpg";
-import { ValidatePW } from "./Hooks";
+import { CreateLP, ValidateContent, ValidatePW, ValidateTitle } from "./Hooks";
 
 export const AddLP = ({ close }: { close: () => void }) => {
   const { Password, handlePasswordCheck } = ValidatePW();
+  const {Title, handletitleCheck} = ValidateTitle()
+  const {Content, handlecontentCheck} = ValidateContent()
   const [TagList, setTag] = useState([""]);
 
   const print= (TagList:string[],i:number) => {
@@ -35,13 +37,14 @@ export const AddLP = ({ close }: { close: () => void }) => {
             <input
               type="text"
               className="input-field"
-        
+              onChange={handletitleCheck}
               placeholder="제목을 입력하세요"
             ></input>
 
             <input
               type="text"
               className="input-field"
+              onChange={handlecontentCheck}
               placeholder="설명을 입력하세요"
             ></input>
 
@@ -66,7 +69,7 @@ export const AddLP = ({ close }: { close: () => void }) => {
             </div>
           </div>
 
-          <button className="submit-btn">Add LP</button>
+          <button className="submit-btn" onClick={()=>CreateLP(Title,Content,TagList,recordImage)}>Add LP</button>
         </div>
       </div>
     </>
