@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./LPDetail.css";
+
 export default function LPDetail() {
-  const { lpid } = useParams();
+  const { lpid } = useParams(); // URL에서 lpid 가져오기
   const [lp, setLp] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +33,7 @@ export default function LPDetail() {
   };
 
   return (
-    <div className="lp-detail-container" style={{ padding: "40px" }}>
+    <div style={{ padding: "40px" }}>
       <div>
         <h4>{lp.author.name}</h4>
         <h4>{formatDate(lp.createdAt)}</h4>
@@ -52,20 +52,12 @@ export default function LPDetail() {
           </svg>
         </button>
       </div>
-
       <img src={lp.thumbnail} alt={lp.title} style={{ maxWidth: "500px" }} />
-
       <p>{lp.content}</p>
-
-      {lp.tags && lp.tags.length > 0 && (
-        <div className="tags">
-          {lp.tags.map((tag) => (
-            <span key={tag.id} className="tag">
-              #{tag.name}
-            </span>
-          ))}
-        </div>
-      )}
+      {console.log(lp)}
+      {lp.tags.map((tag) => (
+        <span> 123#{tag.name}</span>
+      ))}
 
       <button>💗 :{lp.likes}</button>
     </div>
