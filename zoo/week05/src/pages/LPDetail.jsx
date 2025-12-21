@@ -54,15 +54,10 @@ export default function LPDetail() {
       </div>
       <img src={lp.thumbnail} alt={lp.title} style={{ maxWidth: "500px" }} />
       <p>{lp.content}</p>
-      {lp.tags && lp.tags.length > 0 && (
-        <div className="tags">
-          {lp.tags.map((tag) => (
-            <span key={tag.id} className="tag">
-              #{tag.name}
-            </span>
-          ))}
-        </div>
-      )}
+      {console.log(lp)}
+      {lp.tags.map((tag) => (
+        <span> 123#{tag.name}</span>
+      ))}
 
       <button>💗 :{lp.likes}</button>
     </div>
