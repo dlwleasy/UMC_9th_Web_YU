@@ -1,45 +1,20 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import { ValidateID, ValidatePW, useToken } from "./Hooks";
+
+
 const Login = () => {
-    const [ID, setID] = useState('')
-    
-    const navigateForsuccessLogin = useNavigate();
+
+    const {ID,handleIDCheck } = ValidateID()
+    const {Password, handlePasswordCheck} = ValidatePW()
 
     const navigate = useNavigate();
-    const handleIDCheck = (e:any) => {
-        const Value_ID = e.target.value;
-        setID(Value_ID);
-    }
 
-    const [Password, setPassword] = useState('')
-
-    const handlePasswordCheck = (e:any) => {
-        const Value_password = e.target.value;
-        setPassword(Value_password)
-    }
+    const {getToken} = useToken()
+    
 
     const ID_OK : boolean= (ID.includes('@') && ID.includes('.'))
     const PW_OK : boolean = (Password.length >= 6)
     const isbothOK = ID_OK && PW_OK
-
-    const getToken = async () => {
-        const SingInURL = 'http://localhost:8000/v1/auth/signin';
-        axios.post(SingInURL,{'email':ID,'password':Password}).then(
-            function (response) {
-                const {accessToken, refreshToken} = response.data.data;
-                console.log(response,accessToken,refreshToken)
-                localStorage.setItem('userName',response.data.data.name)
-                localStorage.setItem('IsLoginned',response.data.data.status)
-                localStorage.setItem('accessToken', accessToken);
-                localStorage.setItem('refreshToken', refreshToken);
-                navigateForsuccessLogin('/')
-            }
-        ).catch(function (response){
-            console.log('로그인 시도중 에러 발생:', response)
-        })
-    }
-
     return (
         <main>
             <section className="login_container">
@@ -56,11 +31,9 @@ const Login = () => {
                 {PW_OK == false && (
                     <span className="alert PassWord">비밀번호는 6자리 이상인지 확인하십시오.</span>
                 )}
-                <button className="login" disabled={!isbothOK} onClick={getToken}>로그인</button>
+                <button className="login" disabled={!isbothOK} onClick={()=>getToken(ID,Password)}>로그인</button>
             </section>
         </main>
     )
 }
-
-
 export default Login

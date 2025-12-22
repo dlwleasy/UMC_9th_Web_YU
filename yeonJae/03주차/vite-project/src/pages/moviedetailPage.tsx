@@ -1,4 +1,4 @@
-import axios from "axios";
+import type { MovieCredit, MovieCreditResponse, MovieDetails, MovieVideo, MovieVideoResponse, } from '../types/movies';
 import { useEffect, useState } from "react";
 import type { MovieCredit, MovieCreditResponse, MovieDetails, MovieVideo, MovieVideoResponse, } from '../types/movies';
 import { useParams } from "react-router-dom";

@@ -1,0 +1,138 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    /* 2. 헤더 스타일 */
+    header {
+      background-color: #242e38; /* 어두운 남색 계열 */
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between; /* 양 끝 정렬 */
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    /* 장바구니 숫자 배지 */
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: #6c757d; /* 회색 배지 (이미지와 비슷하게) */
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* 3. 리스트 컨테이너 */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    /* 4. 개별 아이템 스타일 */
+    .item {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee; /* 아이템 사이 얇은 줄 */
+    }
+
+    /* 앨범 커버 이미지 */
+    .album-art {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      object-fit: cover;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* 가운데 텍스트 정보 */
+    .item-info {
+      flex: 1; /* 남은 공간 모두 차지 */
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .item-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .item-artist {
+      font-size: 14px;
+      color: #888; /* 회색 텍스트 */
+      margin-bottom: 8px;
+    }
+
+    .item-price {
+      font-size: 16px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* 5. 수량 조절 버튼 (오른쪽) */
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      background-color: #e0e0e0; /* 연한 회색 배경 */
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      cursor: pointer;
+      color: #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background-color: #d0d0d0;
+    }
+
+    .qty-display {
+      width: 30px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+      background-color: #fff; /* 숫자는 흰 배경 */
+      height: 26px; /* 위아래 살짝 띄우기 위해 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2px 0; /* 버튼과 높이 맞추기 */
+    }

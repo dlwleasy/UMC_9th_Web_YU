@@ -2,22 +2,12 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/navbars';
 import { useSidebar } from '../components/contextapi';
 import { AddLP } from '../pages/addLP';
-import { useState } from 'react';
-
+import Open_Close from './Hooks'
 
 const Rootlayout = () => {
-    const {isOpen,setOpen} = useSidebar()
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 3. 모달을 여는 함수
-    const openModal = () => {
-    setIsModalOpen(true);
-    };
-
-  // 4. 모달을 닫는 함수
-    const closeModal = () => {
-    setIsModalOpen(false);
-    };
+    const {isOpen} = useSidebar()
+    const {openModal, closeModal, isModalOpen} = Open_Close()
     
     return (
         <>
