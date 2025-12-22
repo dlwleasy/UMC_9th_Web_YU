@@ -2,7 +2,7 @@ import { useContext, useState, type ReactNode } from "react";
 import { createContext } from "react";
 import cartItems from "./data";
 import type { CartContextType } from "./types";
-
+import { Provider } from "react-redux";
 
 export const CartContext = createContext<CartContextType|null>(null)
 

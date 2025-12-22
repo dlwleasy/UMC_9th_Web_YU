@@ -12,7 +12,8 @@ const Comment_detailsLP = () => {
   const {Content, handlecontentCheck} = ValidateContent()
   console.log('댓글 확인', Content)
   const { data_LP, prettireFromet_date, Like } = getdata(LPid);
-  console.log("LP 데이터", data_LP, "지금 아이디", LPid);
+  
+  console.log("LP 데이터", data_LP, "지금 아이디", LPid,'테그',data_LP?.data.data.tags);
   const [checked, setSortOrder] = useState(false); // 'latest' | 'oldest'
   const latestOrOld: "asc" | "desc" = checked ? "asc" : "desc";
   console.log(latestOrOld);
@@ -101,12 +102,8 @@ const Comment_detailsLP = () => {
               <p className="description">{data_LP?.data.data.content}</p>
 
               <div className="tags-container">
-                <span className="tag"># 오타니안</span>
-                <span className="tag"># 빅뱅</span>
-                <span className="tag"># 권지용</span>
-                <span className="tag"># 정형돈</span>
-                <span className="tag"># 광희</span>
-                <span className="tag"># ubermensch</span>
+                {data_LP?.data.data.tags.map((tag:string)=><span className="tag"># {tag.name}</span>)}
+                
               </div>
 
               <div className="card-footer">
